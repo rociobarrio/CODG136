@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+ 
+
+<!--title-->
+<title>Vacation Villa Rental</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+
+<!--Linking to Leaflet CSS document-->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+
+<!--Linking to Leaflet JS API-->
+<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+    
+<!--Styling document elements with css, declaring the map to fill the entire page-->
+<style type="text/css">
+html { height: 100% }
+body { height: 100%; margin: 0; padding: 0 }
+#mapid { width: 100%; height: 100%}
+</style>
+</head>
+
+<body>
+ 
+
+<!--Declaring a div element with an id where I want the map to be-->
+<div id="mapid"></div>
+
+
+<script>
+//Initializing the map and setting its view to the centre of Leicester's coordinates, zoom level and adding two default layers - one of the base layers and the marker's layer.
+var mymap = L.map('mapid', {center: [36.51212,-4.838319], zoom: 14});
+//Displaying a custom marker at each University.
+//When the user clicks the marker, an info window opens that displays University name in bolded text and its address beneath it.
+var villaIcon = L.icon({
+    iconUrl: 'villa.png',
+
+    iconSize:     [32, 37], // size of the icon
+    iconAnchor:   [20, 36], // point of the icon which will correspond to marker's location
+    popupAnchor:  [0, -37] // point from which the popup should open relative to the iconAnchor
+
+});
+
+var beachIcon = L.icon({
+    iconUrl: 'beach.png',
+
+    iconSize:     [32, 37], // size of the icon
+    iconAnchor:   [20, 36], // point of the icon which will correspond to marker's location
+    popupAnchor:  [0, -37] // point from which the popup should open relative to the iconAnchor
+
+});
+
+L.marker([36.510821,-4.803388], {icon: villaIcon}).bindPopup("<b>The villa</b><br>C/Avda. del Rosario, 389, Marbella 29604").addTo(mymap);
+L.marker([36.499104,-4.816888], {icon: beachIcon}).bindPopup("<b>Alicate beach</b><br>Distance to villa: 2 km<br>Driving time: 5 min").addTo(mymap);
+
+// Adding two base custom tile layers to my map taken from https://leaflet-extras.github.io/leaflet-providers/preview/
+L.tileLayer('https://korona.geog.uni-heidelberg.de/tiles/roads/x={x}&y={y}&z={z}', {
+	maxZoom: 20,
+	attribution: 'Imagery from <a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(mymap);
+ 
+
+
+
+</script>
+
+
+
+</body>
+</html>
